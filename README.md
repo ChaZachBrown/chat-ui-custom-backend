@@ -1,4 +1,4 @@
-# ChatUI Custom Frontend
+# ChatUI Custom Backend
 
 This is a modified version of the Hugging Face [chat-ui](https://github.com/huggingface/chat-ui) designed to interface with a custom backend for LLM (Large Language Model) projects. The purpose of this frontend is to provide a simple and efficient user interface for LLM projects, allowing users to prototype without needing to create a UI from scratch. There is an example custom backend showcasing how to interface with this application found [here](https://github.com/ChaZachBrown/chatui-flask-backend)
 
