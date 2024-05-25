@@ -36,31 +36,4 @@ This ChatUI application connects to a custom backend for handling agentic tasks 
 
 
 ### Changes made
-There are several changes made is this application from the base chat-ui to allow it to connect to a custom backend. I added or modified the following
-- src/lib/server/models.ts
-  * ``` bash 
-      case "custom-flask":
-            return endpoints["custom-flask"](args);
-- src/lib/server/endpoints/endpoints.ts
-  *  ``` bash
-      import { endpointCustomFlask, endpointCustomFlaskParametersSchema } from "./custom-flask/endpointCustomFlask";
-- src/lib/server/textGeneration/index.ts
-  * I commented out Title generation, webSearch, and tool usage. This is because these features were causing multiple requests to the backend and are not needed if the custom backend it handling everything. There might be a way to turn these off in the configuration.
-  * ``` bash
-    // generateTitleForConversation(ctx.conv),
-  * ``` bash
-    // if (
-    // 	!isContinue &&
-    // 	!model.tools &&
-    // 	((webSearch && !conv.assistantId) || assistantHasWebSearch(assistant))
-    // ) {
-    // 	webSearchResult = yield* runWebSearch(conv, messages, assistant?.rag);
-    // }
-    // if (assistantHasDynamicPrompt(assistant) && preprompt) {
-    // 	preprompt = await processPreprompt(preprompt);
-    // 	if (messages[0].from === "system") messages[0].content = preprompt;
-    // }
-    // const tools = pickTools(toolsPreference, Boolean(assistant));
-    // const toolResults = yield* runTools(ctx, tools, preprompt);
-- src/lib/server/endpoints/custom-flask/endpointCustomFlask.ts
-  * This is the custom connection module that connects to the configured backend.
+There are several changes made is this application from the base chat-ui to allow it to connect to a custom backend. Look at the commit history to see.
