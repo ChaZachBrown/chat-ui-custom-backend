@@ -238,6 +238,8 @@ const addEndpoint = (m: Awaited<ReturnType<typeof processModel>>) => ({
 						return await endpoints.cohere(args);
 					case "langserve":
 						return await endpoints.langserve(args);
+					case "custom-flask":
+						return endpoints["custom-flask"](args);
 					default:
 						// for legacy reason
 						return endpoints.tgi(args);

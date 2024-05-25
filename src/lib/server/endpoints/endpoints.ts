@@ -28,6 +28,8 @@ import endpointLangserve, {
 
 import type { Tool, ToolCall, ToolResult } from "$lib/types/Tool";
 
+import { endpointCustomFlask, endpointCustomFlaskParametersSchema } from "./custom-flask/endpointCustomFlask";
+
 export type EndpointMessage = Omit<Message, "id">;
 
 // parameters passed when generating text
@@ -68,6 +70,7 @@ export const endpoints = {
 	cloudflare: endpointCloudflare,
 	cohere: endpointCohere,
 	langserve: endpointLangserve,
+	"custom-flask": endpointCustomFlask,   // Add your Flask endpoint generator
 };
 
 export const endpointSchema = z.discriminatedUnion("type", [
@@ -82,5 +85,6 @@ export const endpointSchema = z.discriminatedUnion("type", [
 	endpointCloudflareParametersSchema,
 	endpointCohereParametersSchema,
 	endpointLangserveParametersSchema,
+	endpointCustomFlaskParametersSchema,
 ]);
 export default endpoints;

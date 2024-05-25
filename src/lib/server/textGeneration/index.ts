@@ -18,12 +18,11 @@ import {
 import { generate } from "./generate";
 import { mergeAsyncGenerators } from "$lib/utils/mergeAsyncGenerators";
 import type { TextGenerationContext } from "./types";
-import type { ToolResult } from "$lib/types/Tool";
 
 export async function* textGeneration(ctx: TextGenerationContext) {
 	yield* mergeAsyncGenerators([
 		textGenerationWithoutTitle(ctx),
-		generateTitleForConversation(ctx.conv),
+		// generateTitleForConversation(ctx.conv),
 	]);
 }
 
@@ -43,26 +42,23 @@ async function* textGenerationWithoutTitle(
 	// it can be because the user toggled the webSearch or because the assistant has webSearch enabled
 	// if tools are enabled, we don't perform it here since we will add the websearch as a tool
 	let webSearchResult: WebSearch | undefined;
-	if (
-		!isContinue &&
-		!model.tools &&
-		((webSearch && !conv.assistantId) || assistantHasWebSearch(assistant))
-	) {
-		webSearchResult = yield* runWebSearch(conv, messages, assistant?.rag);
-	}
-
+	// if (
+	// 	!isContinue &&
+	// 	!model.tools &&
+	// 	((webSearch && !conv.assistantId) || assistantHasWebSearch(assistant))
+	// ) {
+	// 	webSearchResult = yield* runWebSearch(conv, messages, assistant?.rag);
+	// }
+	//
 	let preprompt = conv.preprompt;
-	if (assistantHasDynamicPrompt(assistant) && preprompt) {
-		preprompt = await processPreprompt(preprompt);
-		if (messages[0].from === "system") messages[0].content = preprompt;
-	}
+	// if (assistantHasDynamicPrompt(assistant) && preprompt) {
+	// 	preprompt = await processPreprompt(preprompt);
+	// 	if (messages[0].from === "system") messages[0].content = preprompt;
+	// }
 
-	let toolResults: ToolResult[] = [];
-
-	if (model.tools && !conv.assistantId) {
-		const tools = pickTools(toolsPreference, Boolean(assistant));
-		toolResults = yield* runTools(ctx, tools, preprompt);
-	}
+	// const tools = pickTools(toolsPreference, Boolean(assistant));
+	// const toolResults = yield* runTools(ctx, tools, preprompt);
+	const toolResults = null;
 
 	const processedMessages = await preprocessMessages(messages, webSearchResult, convId);
 	yield* generate({ ...ctx, messages: processedMessages }, toolResults, preprompt);
