@@ -30,7 +30,28 @@ This ChatUI application connects to a custom backend for handling agentic tasks 
   ```docker run -d -p 27017:27017 --name mongo-chatui mongo:latest```
 4. **Install dependencies:**
   ```npm install```
-5. **Run**
+5. **Create .env.local file: Example**
+   ```
+   MONGODB_URL=mongodb://localhost:27017  # Or your MongoDB connection string
+   MODELS=`[
+     {
+       "name": "My Flask Model",
+       "displayName": "My Flask Model",
+       "parameters": {
+         "temperature": 0.7,
+         "max_new_tokens": 256
+       },
+       "endpoints": [
+         {
+           "type": "custom-flask",
+           "url": "http://localhost:5001/generate",
+           "stopUrl": "http://localhost:5001/stop-generating"
+         }
+       ]
+     },
+   ]`
+   ```
+7. **Run**
   ```npm run dev```
 
 
